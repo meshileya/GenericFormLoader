@@ -3,13 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0451A12A234CA14A003AF422 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451A129234CA14A003AF422 /* AppDelegate.swift */; };
-		0451A12C234CA14A003AF422 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451A12B234CA14A003AF422 /* SceneDelegate.swift */; };
-		0451A12E234CA14A003AF422 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451A12D234CA14A003AF422 /* ContentView.swift */; };
 		0451A130234CA151003AF422 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0451A12F234CA151003AF422 /* Assets.xcassets */; };
 		0451A133234CA151003AF422 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0451A132234CA151003AF422 /* Preview Assets.xcassets */; };
 		0451A136234CA151003AF422 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0451A134234CA151003AF422 /* LaunchScreen.storyboard */; };
@@ -19,6 +17,15 @@
 		04CC824B234DBEF300EA8F17 /* GenericPageController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC824A234DBEF300EA8F17 /* GenericPageController+Extension.swift */; };
 		04CC824D234DBF1D00EA8F17 /* GenericPageController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC824C234DBF1D00EA8F17 /* GenericPageController+UICollectionView.swift */; };
 		04CC824F234DBF3800EA8F17 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC824E234DBF3800EA8F17 /* Page.swift */; };
+		04CC8254234E57CB00EA8F17 /* FormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC8253234E57CB00EA8F17 /* FormInteractor.swift */; };
+		04CC8256234E585B00EA8F17 /* pet_adoption.json in Resources */ = {isa = PBXBuildFile; fileRef = 04CC8255234E585B00EA8F17 /* pet_adoption.json */; };
+		04CC8258234E58CC00EA8F17 /* PageMainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC8257234E58CC00EA8F17 /* PageMainResponse.swift */; };
+		04CC825A234E593B00EA8F17 /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC8259234E593B00EA8F17 /* SectionModel.swift */; };
+		04CC825C234E59D800EA8F17 /* ElementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC825B234E59D800EA8F17 /* ElementModel.swift */; };
+		04CC825E234E614900EA8F17 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC825D234E614900EA8F17 /* SplashScreenController.swift */; };
+		04CC8260234E61B600EA8F17 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC825F234E61B600EA8F17 /* NavigationHelper.swift */; };
+		04CC8262234E622400EA8F17 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC8261234E622400EA8F17 /* UIApplication+Extension.swift */; };
+		04CC8264234E624E00EA8F17 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC8263234E624E00EA8F17 /* UIViewController+Extension.swift */; };
 		4979021E36BE07B3D6BEBE91 /* Pods_GenericFormLoaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F26CD7C60EC95FC86FC882B /* Pods_GenericFormLoaderTests.framework */; };
 		686E42FD872D61DB16405D0D /* Pods_GenericFormLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3D6FC840D241EA13ED6D48 /* Pods_GenericFormLoader.framework */; };
 /* End PBXBuildFile section */
@@ -36,8 +43,6 @@
 /* Begin PBXFileReference section */
 		0451A126234CA14A003AF422 /* GenericFormLoader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericFormLoader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0451A129234CA14A003AF422 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0451A12B234CA14A003AF422 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0451A12D234CA14A003AF422 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0451A12F234CA151003AF422 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0451A132234CA151003AF422 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0451A135234CA151003AF422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +55,15 @@
 		04CC824A234DBEF300EA8F17 /* GenericPageController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GenericPageController+Extension.swift"; sourceTree = "<group>"; };
 		04CC824C234DBF1D00EA8F17 /* GenericPageController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GenericPageController+UICollectionView.swift"; sourceTree = "<group>"; };
 		04CC824E234DBF3800EA8F17 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		04CC8253234E57CB00EA8F17 /* FormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInteractor.swift; sourceTree = "<group>"; };
+		04CC8255234E585B00EA8F17 /* pet_adoption.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pet_adoption.json; sourceTree = "<group>"; };
+		04CC8257234E58CC00EA8F17 /* PageMainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageMainResponse.swift; sourceTree = "<group>"; };
+		04CC8259234E593B00EA8F17 /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
+		04CC825B234E59D800EA8F17 /* ElementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementModel.swift; sourceTree = "<group>"; };
+		04CC825D234E614900EA8F17 /* SplashScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
+		04CC825F234E61B600EA8F17 /* NavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
+		04CC8261234E622400EA8F17 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		04CC8263234E624E00EA8F17 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		1289046D464F6107CAEE459E /* Pods-GenericFormLoaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenericFormLoaderTests.debug.xcconfig"; path = "Target Support Files/Pods-GenericFormLoaderTests/Pods-GenericFormLoaderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2515768EFD8523FC98FAF4B8 /* Pods-GenericFormLoaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenericFormLoaderTests.release.xcconfig"; path = "Target Support Files/Pods-GenericFormLoaderTests/Pods-GenericFormLoaderTests.release.xcconfig"; sourceTree = "<group>"; };
 		2F3BA4DF908A9CC19E73B00B /* Pods-GenericFormLoader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenericFormLoader.release.xcconfig"; path = "Target Support Files/Pods-GenericFormLoader/Pods-GenericFormLoader.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,12 +115,12 @@
 		0451A128234CA14A003AF422 /* GenericFormLoader */ = {
 			isa = PBXGroup;
 			children = (
+				04CC8255234E585B00EA8F17 /* pet_adoption.json */,
+				04CC8252234E579600EA8F17 /* Interactor */,
 				0451A14D234CBDF2003AF422 /* Common */,
 				0451A14C234CBDEC003AF422 /* Entity */,
 				0451A14B234CBDE2003AF422 /* View */,
 				0451A129234CA14A003AF422 /* AppDelegate.swift */,
-				0451A12B234CA14A003AF422 /* SceneDelegate.swift */,
-				0451A12D234CA14A003AF422 /* ContentView.swift */,
 				0451A12F234CA151003AF422 /* Assets.xcassets */,
 				0451A134234CA151003AF422 /* LaunchScreen.storyboard */,
 				0451A137234CA151003AF422 /* Info.plist */,
@@ -139,6 +153,7 @@
 				04CC8245234DBEA900EA8F17 /* GenericPageController.swift */,
 				04CC824A234DBEF300EA8F17 /* GenericPageController+Extension.swift */,
 				04CC824C234DBF1D00EA8F17 /* GenericPageController+UICollectionView.swift */,
+				04CC825D234E614900EA8F17 /* SplashScreenController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,6 +162,9 @@
 			isa = PBXGroup;
 			children = (
 				04CC824E234DBF3800EA8F17 /* Page.swift */,
+				04CC8257234E58CC00EA8F17 /* PageMainResponse.swift */,
+				04CC8259234E593B00EA8F17 /* SectionModel.swift */,
+				04CC825B234E59D800EA8F17 /* ElementModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -154,6 +172,9 @@
 		0451A14D234CBDF2003AF422 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				04CC825F234E61B600EA8F17 /* NavigationHelper.swift */,
+				04CC8261234E622400EA8F17 /* UIApplication+Extension.swift */,
+				04CC8263234E624E00EA8F17 /* UIViewController+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -164,6 +185,14 @@
 				04CC8248234DBECE00EA8F17 /* GenericPageCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		04CC8252234E579600EA8F17 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				04CC8253234E57CB00EA8F17 /* FormInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		4521973D24AA14B5F35D2439 /* Pods */ = {
@@ -197,6 +226,7 @@
 				0451A122234CA14A003AF422 /* Sources */,
 				0451A123234CA14A003AF422 /* Frameworks */,
 				0451A124234CA14A003AF422 /* Resources */,
+				061249880A0177CB42E6C6DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -272,6 +302,7 @@
 				0451A136234CA151003AF422 /* LaunchScreen.storyboard in Resources */,
 				0451A133234CA151003AF422 /* Preview Assets.xcassets in Resources */,
 				0451A130234CA151003AF422 /* Assets.xcassets in Resources */,
+				04CC8256234E585B00EA8F17 /* pet_adoption.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +316,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		061249880A0177CB42E6C6DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenericFormLoader/Pods-GenericFormLoader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GenericFormLoader/Pods-GenericFormLoader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GenericFormLoader/Pods-GenericFormLoader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3E1CE2F50A962EC988E24A5F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,14 +384,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CC8264234E624E00EA8F17 /* UIViewController+Extension.swift in Sources */,
+				04CC825C234E59D800EA8F17 /* ElementModel.swift in Sources */,
 				04CC824B234DBEF300EA8F17 /* GenericPageController+Extension.swift in Sources */,
 				04CC8249234DBECE00EA8F17 /* GenericPageCell.swift in Sources */,
+				04CC8258234E58CC00EA8F17 /* PageMainResponse.swift in Sources */,
 				04CC824F234DBF3800EA8F17 /* Page.swift in Sources */,
 				04CC8246234DBEA900EA8F17 /* GenericPageController.swift in Sources */,
 				04CC824D234DBF1D00EA8F17 /* GenericPageController+UICollectionView.swift in Sources */,
 				0451A12A234CA14A003AF422 /* AppDelegate.swift in Sources */,
-				0451A12C234CA14A003AF422 /* SceneDelegate.swift in Sources */,
-				0451A12E234CA14A003AF422 /* ContentView.swift in Sources */,
+				04CC825E234E614900EA8F17 /* SplashScreenController.swift in Sources */,
+				04CC8260234E61B600EA8F17 /* NavigationHelper.swift in Sources */,
+				04CC825A234E593B00EA8F17 /* SectionModel.swift in Sources */,
+				04CC8254234E57CB00EA8F17 /* FormInteractor.swift in Sources */,
+				04CC8262234E622400EA8F17 /* UIApplication+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

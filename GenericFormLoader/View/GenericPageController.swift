@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 
 class GenericPageController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    var counted:Int = 0
     
-    let pages = [
-        Page(imageName: "icon_splash_one", headerText: "Create or Join Trip Group", bodyText: "Create cool and stress free trip groups for you and your freinds and family"),
-        Page(imageName: "icon_splash_two", headerText: "Get a Driver and Vehicle", bodyText: "Get a professional driver once your new trip group is filled up"),
-        Page(imageName: "icon_splash_three", headerText: "Enjoy Your Trip", bodyText: "Ride in Comfort, Securely and Conveniently to your preferred Destination.")
-    ]
+    var counted:Int = 0
+    var pages : [Page] = []
+    
+    var formDataInteractor = FormInteractor()
+//    let pages = [
+//        Page(imageName: "icon_splash_one", headerText: "Create or Join Trip Group", bodyText: "Create cool and stress free trip groups for you and your freinds and family"),
+//        Page(imageName: "icon_splash_two", headerText: "Get a Driver and Vehicle", bodyText: "Get a professional driver once your new trip group is filled up"),
+//        Page(imageName: "icon_splash_three", headerText: "Enjoy Your Trip", bodyText: "Ride in Comfort, Securely and Conveniently to your preferred Destination.")
+//    ]
     
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
@@ -99,6 +102,12 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         customImageView.isHidden = false
         continueLabel.isHidden = true
         skipAllLabel.isHidden = false
+        let rDataModel = PageMainResponse(fromDictionary: formDataInteractor.readJsonDataFromFile(fileName: "") as! [String : Any])
+        pages = rDataModel.pages
+        
+        print("ITEMS NUMBER ==> \(pages.count)")
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

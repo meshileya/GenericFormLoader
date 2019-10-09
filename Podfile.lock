@@ -1,3 +1,30 @@
-PODFILE CHECKSUM: 663b605ab016e00ae45abccd7195385a413498ff
+PODS:
+  - IQKeyboardManagerSwift (6.4.1)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
+  - SkyFloatingLabelTextField (3.7.0)
+  - TTGSnackbar (1.8.0)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
+  - SkyFloatingLabelTextField
+  - TTGSnackbar
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IQKeyboardManagerSwift
+    - NVActivityIndicatorView
+    - SkyFloatingLabelTextField
+    - TTGSnackbar
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: d2df660d0b8d64a15cb2537c9ff303213fa515b2
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
+  TTGSnackbar: 7edc064c82a916f9f3c4db1ec64eac44143434da
+
+PODFILE CHECKSUM: 8ecc475cf8a93411fae6baf933b4a2dbef6ec0b2
 
 COCOAPODS: 1.7.5

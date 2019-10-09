@@ -11,5 +11,9 @@ target 'GenericFormLoader' do
     inherit! :search_paths
     # Pods for testing
   end
+pod 'IQKeyboardManagerSwift'
+pod 'NVActivityIndicatorView'
+pod "TTGSnackbar"
+pod 'SkyFloatingLabelTextField' 
 
 end

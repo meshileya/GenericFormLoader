@@ -13,19 +13,19 @@ class GenericPageCell: UICollectionViewCell {
     
     var page: Page? {
         didSet {
-            guard let unwrappedPage = page else { return }
-            
-            ellipseImageView.image = UIImage(named: unwrappedPage.imageName)
-            
-            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-            
-            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-            
-            textHeaderandDescription.attributedText = attributedText
-            textHeaderandDescription.textAlignment = .center
-            textHeaderandDescription.backgroundColor = .white
-            
-            print("TheImageName ==> \(unwrappedPage.imageName)")
+//            guard let unwrappedPage = page else { return }
+//
+//            ellipseImageView.image = UIImage(named: unwrappedPage.imageName)
+//
+//            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+//
+//            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+//
+//            textHeaderandDescription.attributedText = attributedText
+//            textHeaderandDescription.textAlignment = .center
+//            textHeaderandDescription.backgroundColor = .white
+//
+//            print("TheImageName ==> \(unwrappedPage.imageName)")
         }
     }
     // Generated Swift code for Vector
