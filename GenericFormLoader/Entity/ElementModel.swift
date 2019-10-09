@@ -11,7 +11,7 @@ class ElementModel : NSObject, NSCoding{
 
     var isMandatory : Bool!
     var label : String!
-    var rules : [AnyObject]!
+    var rules : [NSDictionary]!
     var type : String!
     var file : String!
     var uniqueId : String!
@@ -26,6 +26,14 @@ class ElementModel : NSObject, NSCoding{
         type = dictionary["type"] as? String
         uniqueId = dictionary["unique_id"] as? String
         file = dictionary["file"] as? String
+        
+        rules = [NSDictionary]()
+        if let elementsArray = dictionary["rules"] as? [[String:Any]]{
+            for dic in elementsArray{
+                let value = NSDictionary(dictionary: dic)
+                rules.append(value)
+            }
+        }
     }
 
     /**
@@ -39,6 +47,9 @@ class ElementModel : NSObject, NSCoding{
         }
         if label != nil{
             dictionary["label"] = label
+        }
+        if rules != nil{
+            dictionary["rules"] = rules
         }
         if type != nil{
             dictionary["type"] = type
@@ -60,7 +71,7 @@ class ElementModel : NSObject, NSCoding{
     {
         isMandatory = aDecoder.decodeObject(forKey: "isMandatory") as? Bool
         label = aDecoder.decodeObject(forKey: "label") as? String
-        rules = aDecoder.decodeObject(forKey: "rules") as? [AnyObject]
+        rules = aDecoder.decodeObject(forKey: "rules") as? [NSDictionary]
         type = aDecoder.decodeObject(forKey: "type") as? String
         uniqueId = aDecoder.decodeObject(forKey: "unique_id") as? String
         file = aDecoder.decodeObject(forKey: "file") as? String

@@ -12,9 +12,15 @@ import Kingfisher
 import SkyFloatingLabelTextField
 
 class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
+    
+    let yesLabel = UILabel()
+    let noLabel = UILabel()
+    
+    var stackView : UIStackView!
+    
     var page: Page? {
         didSet {
-            let stackView = UIStackView()
+            stackView = UIStackView()
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.spacing = 15
             stackView.axis = .vertical
@@ -28,13 +34,14 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
             
             for sectionItem in page?.sections ?? []{
-                
                 let label = UILabel()
                 label.text = sectionItem.label
                 label.font = .systemFont(ofSize: 14, weight: .bold)
                 stackView.addArrangedSubview(label)
                 
                 for elementItems in sectionItem.elements{
+                    
+                    
                     if elementItems.type == "embeddedphoto"{
                         let placeholder = "icon_placeholder"
                         
@@ -86,7 +93,7 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
                         field.returnKeyType = .next
                         stackView.addArrangedSubview(field)
                     }
-                    
+                        
                     else if elementItems.type == "yesno"{
                         let label = UILabel()
                         label.text = elementItems.label
@@ -98,24 +105,45 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
                         subStackView.distribution = .fill
                         subStackView.alignment = .fill
                         
-                        let yesLabel = UILabel()
                         yesLabel.text = "Yes"
                         yesLabel.textColor = .green
-                        yesLabel.font = .systemFont(ofSize: 14, weight: .bold)
+                        yesLabel.font = .systemFont(ofSize: 18, weight: .bold)
+                        yesLabel.isUserInteractionEnabled = true
+                        yesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onYesTapped)))
                         
-                        let noLabel = UILabel()
+                        
                         noLabel.text = "No"
                         noLabel.textColor = .red
                         noLabel.font = .systemFont(ofSize: 14, weight: .light)
+                        noLabel.isUserInteractionEnabled = true
+                        noLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onNoTapped)))
                         
                         subStackView.addArrangedSubview(yesLabel)
                         subStackView.addArrangedSubview(noLabel)
+                        
+                        if elementItems.rules.count > 0{
+                            for item in elementItems.rules {
+                                for (key, value) in item {
+                                    
+                                }
+                            }
+                        }
                         stackView.addArrangedSubview(label)
                         stackView.addArrangedSubview(subStackView)
                     }
                 }
             }
         }
+    }
+    
+    @objc func onYesTapped(){
+        yesLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        noLabel.font = .systemFont(ofSize: 14, weight: .light)
+    }
+    
+    @objc func onNoTapped(){
+        noLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        yesLabel.font = .systemFont(ofSize: 14, weight: .light)
     }
     
     lazy var scrollView : UIScrollView = {
