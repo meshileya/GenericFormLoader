@@ -16,6 +16,7 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
     let yesLabel = UILabel()
     let noLabel = UILabel()
     let targetLabel = UILabel()
+    let dateTimeField = SkyFloatingLabelTextField()
     
     var stackView : UIStackView!
     
@@ -85,14 +86,14 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
                         stackView.addArrangedSubview(field)
                     }
                     else if elementItems.type == "datetime"{
-                        let field = SkyFloatingLabelTextField()
-                        field.translatesAutoresizingMaskIntoConstraints = false
-                        field.keyboardType = .numberPad
-                        field.title = elementItems.label
-                        field.placeholder = elementItems.label
-                        field.tag = 1
-                        field.returnKeyType = .next
-                        stackView.addArrangedSubview(field)
+                        dateTimeField.translatesAutoresizingMaskIntoConstraints = false
+                        dateTimeField.keyboardType = .numberPad
+                        dateTimeField.title = elementItems.label
+                        dateTimeField.placeholder = elementItems.label
+                        dateTimeField.tag = 1
+                        dateTimeField.returnKeyType = .next
+                        dateTimeField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onDobTapped)))
+                        stackView.addArrangedSubview(dateTimeField)
                     }
                         
                     else if elementItems.type == "yesno"{
@@ -141,6 +142,46 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
                 }
             }
         }
+    }
+    
+    var datePickerContainer = UIView()
+    let dobTimePicker = UIDatePicker()
+    var dobDatePicker = UIDatePicker()
+    
+    @objc func onDobTapped(){
+        datePickerContainer.frame = CGRect(x: 0.0, y: (self.frame.height/2 + 30), width: self.frame.width, height: 250)
+        datePickerContainer.backgroundColor = UIColor.white
+        
+        let doneButton = UIButton()
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.setTitleColor(UIColor.blue, for: .normal)
+        doneButton.addTarget(self, action: #selector(dismissPickupPicker), for: UIControl.Event.touchUpInside)
+        doneButton.frame = CGRect(x: 250.0, y: 5.0, width: 70.0, height: 40.0)
+        datePickerContainer.addSubview(doneButton)
+        
+        dobTimePicker.frame = CGRect(x: 0.0, y: 40.0, width: self.frame.width, height: 200.0)
+        dobTimePicker.datePickerMode = .dateAndTime
+        dobTimePicker.backgroundColor = UIColor.white
+        dobTimePicker.addTarget(self, action: #selector(startPickTimeDiveChanged), for: .valueChanged)
+        datePickerContainer.addSubview(dobTimePicker)
+        
+        self.addSubview(datePickerContainer)
+    }
+    
+    @objc func startPickTimeDiveChanged(sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .medium
+        dateTimeField.text = "DOB: \(formatter.string(from: dobDatePicker.date))"
+        datePickerContainer.removeFromSuperview()
+    }
+    
+    @objc func dismissPickupPicker() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .medium
+        dateTimeField.text = "DOB: \(formatter.string(from: dobDatePicker.date))"
+        datePickerContainer.removeFromSuperview()
     }
     
     @objc func onYesTapped(){
