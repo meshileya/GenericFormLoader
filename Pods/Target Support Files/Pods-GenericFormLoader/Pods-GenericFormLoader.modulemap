@@ -1,0 +1,6 @@
+framework module Pods_GenericFormLoader {
+  umbrella header "Pods-GenericFormLoader-umbrella.h"
+
+  export *
+  module * { export * }
+}
