@@ -15,5 +15,6 @@ pod 'IQKeyboardManagerSwift'
 pod 'NVActivityIndicatorView'
 pod "TTGSnackbar"
 pod 'SkyFloatingLabelTextField' 
+pod 'Kingfisher', '~> 4.0'
 
 end

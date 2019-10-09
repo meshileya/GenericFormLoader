@@ -21,7 +21,6 @@ extension GenericPageController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! GenericPageCell
-        
         let page = pages[indexPath.item]
         cell.page = page
         return cell

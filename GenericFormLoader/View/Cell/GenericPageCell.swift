@@ -8,70 +8,124 @@
 
 import Foundation
 import UIKit
+import Kingfisher
+import SkyFloatingLabelTextField
 
-class GenericPageCell: UICollectionViewCell {
-    
+class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
     var page: Page? {
         didSet {
-//            guard let unwrappedPage = page else { return }
-//
-//            ellipseImageView.image = UIImage(named: unwrappedPage.imageName)
-//
-//            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-//
-//            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-//
-//            textHeaderandDescription.attributedText = attributedText
-//            textHeaderandDescription.textAlignment = .center
-//            textHeaderandDescription.backgroundColor = .white
-//
-//            print("TheImageName ==> \(unwrappedPage.imageName)")
+            let stackView = UIStackView()
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.spacing = 15
+            stackView.axis = .vertical
+            stackView.distribution = .fill
+            stackView.alignment = .fill
+            
+            scrollView.addSubview(stackView)
+            stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 25).isActive = true
+            stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -25).isActive = true
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            
+            for sectionItem in page?.sections ?? []{
+                
+                let label = UILabel()
+                label.text = sectionItem.label
+                label.font = .systemFont(ofSize: 14, weight: .bold)
+                stackView.addArrangedSubview(label)
+                
+                for elementItems in sectionItem.elements{
+                    if elementItems.type == "embeddedphoto"{
+                        let placeholder = "icon_placeholder"
+                        
+                        let thumbnailImageUrl = elementItems.file ?? placeholder
+                        let url = URL(string: thumbnailImageUrl)
+                        
+                        let imageView = UIImageView()
+                        imageView.image = UIImage(named: "icon_placeholder")
+                        imageView.translatesAutoresizingMaskIntoConstraints = false
+                        imageView.contentMode = .scaleToFill
+                        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+                        imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+                        
+                        imageView.layer.masksToBounds = true
+                        imageView.kf.setImage(with: url, placeholder: UIImage(named: placeholder))
+                        stackView.addArrangedSubview(imageView)
+                        
+                    }
+                        
+                    else if elementItems.type == "text"{
+                        let field = SkyFloatingLabelTextField()
+                        field.translatesAutoresizingMaskIntoConstraints = false
+                        field.keyboardType = .asciiCapable
+                        field.title = elementItems.label
+                        field.placeholder = elementItems.label
+                        field.widthAnchor.constraint(equalToConstant: 300).isActive = true
+                        field.tag = 1
+                        field.returnKeyType = .next
+                        stackView.addArrangedSubview(field)
+                    }
+                        
+                    else if elementItems.type == "formattednumeric"{
+                        let field = SkyFloatingLabelTextField()
+                        field.translatesAutoresizingMaskIntoConstraints = false
+                        field.keyboardType = .numberPad
+                        field.title = elementItems.label
+                        field.placeholder = elementItems.label
+                        field.tag = 1
+                        field.returnKeyType = .next
+                        stackView.addArrangedSubview(field)
+                    }
+                    else if elementItems.type == "datetime"{
+                        let field = SkyFloatingLabelTextField()
+                        field.translatesAutoresizingMaskIntoConstraints = false
+                        field.keyboardType = .numberPad
+                        field.title = elementItems.label
+                        field.placeholder = elementItems.label
+                        field.tag = 1
+                        field.returnKeyType = .next
+                        stackView.addArrangedSubview(field)
+                    }
+                    
+                    else if elementItems.type == "yesno"{
+                        let label = UILabel()
+                        label.text = elementItems.label
+                        
+                        let subStackView = UIStackView()
+                        stackView.translatesAutoresizingMaskIntoConstraints = false
+                        subStackView.spacing = 15
+                        subStackView.axis = .horizontal
+                        subStackView.distribution = .fill
+                        subStackView.alignment = .fill
+                        
+                        let yesLabel = UILabel()
+                        yesLabel.text = "Yes"
+                        yesLabel.textColor = .green
+                        yesLabel.font = .systemFont(ofSize: 14, weight: .bold)
+                        
+                        let noLabel = UILabel()
+                        noLabel.text = "No"
+                        noLabel.textColor = .red
+                        noLabel.font = .systemFont(ofSize: 14, weight: .light)
+                        
+                        subStackView.addArrangedSubview(yesLabel)
+                        subStackView.addArrangedSubview(noLabel)
+                        stackView.addArrangedSubview(label)
+                        stackView.addArrangedSubview(subStackView)
+                    }
+                }
+            }
         }
     }
-    // Generated Swift code for Vector
     
-    
-    //    let headerImageView: UIImageView = {
-    //        let imageView = UIImageView()
-    //        imageView.image = UIImage(named: "header_one")
-    //        imageView.contentMode = .scaleAspectFill
-    //        imageView.layer.masksToBounds = true
-    //        return imageView
-    //    }()
-    
-    let ellipseImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "icon_ellipse")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        return imageView
+    lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.tag = 19200
+        scrollView.delegate = self
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
     }()
     
-    private let textHeaderandDescription: UITextView = {
-        let textView = UITextView()
-        
-        let attributedText = NSMutableAttributedString(string: "Ride!", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
-        
-        attributedText.append(NSAttributedString(string: "\n\n\n Ride", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.blue]))
-        
-        textView.attributedText = attributedText
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.textAlignment = .center
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        return textView
-    }()
-    
-    //    let textTitleDescription: UILabel = {
-    //        let label = UILabel()
-    //        label.font = UIFont(name: "Heiti TC", size: 13)
-    //        label.translatesAutoresizingMaskIntoConstraints = false
-    //        label.textColor = UIColor.lightGray
-    //        label.text = "Your description"
-    //        label.numberOfLines = 2
-    //        return label
-    //    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,35 +133,11 @@ class GenericPageCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        
-        //        addSubview(headerImageView)
-        addSubview(ellipseImageView)
-        addSubview(textHeaderandDescription)
-        //        addSubview(textTitleDescription)
-        
-        
-        //        addConstraintsWithFormat("H:|[v0]|", views: headerImageView)
-        //        addConstraintsWithFormat("V:|[v0(110)]|", views: headerImageView)
-        //        addConstraintsWithFormat("H:|[v0(170)]|", views: ellipseImageView)
-        //        addConstraintsWithFormat("V:|[v0(170)]|", views: headerImageView)
-        //top constraintc
-        addConstraint(NSLayoutConstraint(item: ellipseImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 100))
-        //right constraint
-        addConstraint(NSLayoutConstraint(item: ellipseImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        //        addConstraint(NSLayoutConstraint(item: ellipseImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        //height constraint
-        addConstraint(NSLayoutConstraint(item: ellipseImageView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: self.frame.height/2 - 50))
-        //left constraint
-        //        addConstraint(NSLayoutConstraint(item: ellipseImageView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 170))
-        
-        //top constraintc
-        addConstraint(NSLayoutConstraint(item: textHeaderandDescription, attribute: .top, relatedBy: .equal, toItem: ellipseImageView, attribute: .bottom, multiplier: 1, constant: 40))
-        //right constraint
-        addConstraint(NSLayoutConstraint(item: textHeaderandDescription, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: -10))
-        //height constraint
-        addConstraint(NSLayoutConstraint(item: textHeaderandDescription, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 170))
-        //left constraint
-        addConstraint(NSLayoutConstraint(item: textHeaderandDescription, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 10))
+        addSubview(scrollView)
+        addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 50))
+        addConstraint(NSLayoutConstraint(item: scrollView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 20))
+        addConstraint(NSLayoutConstraint(item: scrollView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: -20))
+        addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -50))
     }
     
     required init?(coder aDecoder: NSCoder) {

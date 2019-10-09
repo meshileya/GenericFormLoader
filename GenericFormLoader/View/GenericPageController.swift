@@ -15,11 +15,6 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
     var pages : [Page] = []
     
     var formDataInteractor = FormInteractor()
-//    let pages = [
-//        Page(imageName: "icon_splash_one", headerText: "Create or Join Trip Group", bodyText: "Create cool and stress free trip groups for you and your freinds and family"),
-//        Page(imageName: "icon_splash_two", headerText: "Get a Driver and Vehicle", bodyText: "Get a professional driver once your new trip group is filled up"),
-//        Page(imageName: "icon_splash_three", headerText: "Enjoy Your Trip", bodyText: "Ride in Comfort, Securely and Conveniently to your preferred Destination.")
-//    ]
     
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
@@ -31,42 +26,25 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         return pc
     }()
     
-    
-    
-    
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         let x = targetContentOffset.pointee.x
         let pageNumber = Int(x / view.frame.width)
         
-        if pageNumber == 2{
+        if pageNumber == pages.count - 1{
             customImageView.isHidden = true
-            continueLabel.isHidden = false
-            skipAllLabel.isHidden = true
+            submitLabel.isHidden = false
         }else{
             customImageView.isHidden = false
-            continueLabel.isHidden = true
-            skipAllLabel.isHidden = false
+            submitLabel.isHidden = true
         }
         pageControl.currentPage = Int(x / view.frame.width)
         
     }
     
-    let skipAllLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = .blue
-        label.text = "Skip all"
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.sizeToFit()
-        return label
-    }()
-    
     lazy var customImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "icon_right_arrow")
+        imageView.image = UIImage(named: "icon_custom_arrow")
         imageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
         imageView.contentMode = .scaleAspectFit
@@ -74,12 +52,12 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         return imageView
     }()
     
-    let continueLabel : UILabel = {
+    let submitLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = UIColor.black
-        label.text = "Continue"
+        label.text = "Submit"
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 12)
         label.sizeToFit()
@@ -87,9 +65,6 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
     }()
     
     @objc func handleSkipAll() {
-//        let vc = LoginController()
-//        vc.modalPresentationStyle = .fullScreen
-//        self.present(vc, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -100,14 +75,9 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.isPagingEnabled = true
         
         customImageView.isHidden = false
-        continueLabel.isHidden = true
-        skipAllLabel.isHidden = false
-        let rDataModel = PageMainResponse(fromDictionary: formDataInteractor.readJsonDataFromFile(fileName: "") as! [String : Any])
+        submitLabel.isHidden = true
+        let rDataModel = PageMainResponse(fromDictionary: formDataInteractor.readJsonDataFromFile(fileName: "pet_adoption") as! [String : Any])
         pages = rDataModel.pages
-        
-        print("ITEMS NUMBER ==> \(pages.count)")
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,18 +91,14 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    let stackView = UIStackView()
     fileprivate func setupBottomControls() {
-        view.addSubview(skipAllLabel)
         view.addSubview(pageControl)
         view.addSubview(customImageView)
-        view.addSubview(continueLabel)
+        view.addSubview(submitLabel)
         
         pageControl.widthAnchor.constraint(equalToConstant: 100).isActive = true
         pageControl.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
-        view.addConstraint(NSLayoutConstraint(item: skipAllLabel, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -50))
-        view.addConstraint(NSLayoutConstraint(item: skipAllLabel, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 20))
         
         view.addConstraint(NSLayoutConstraint(item: pageControl, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -80))
         view.addConstraint(NSLayoutConstraint(item: pageControl, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
@@ -140,17 +106,15 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         view.addConstraint(NSLayoutConstraint(item: customImageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -45))
         view.addConstraint(NSLayoutConstraint(item: customImageView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -50))
         
-        view.addConstraint(NSLayoutConstraint(item: continueLabel, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -50))
-        view.addConstraint(NSLayoutConstraint(item: continueLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -50))
+        view.addConstraint(NSLayoutConstraint(item: submitLabel, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -50))
+        view.addConstraint(NSLayoutConstraint(item: submitLabel, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -50))
         
-        skipAllLabel.isUserInteractionEnabled = true
-        skipAllLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSkipAll)))
         
         customImageView.isUserInteractionEnabled = true
         customImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onNextPageClick)))
         
-        continueLabel.isUserInteractionEnabled = true
-        continueLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSkipAll)))
+        submitLabel.isUserInteractionEnabled = true
+        submitLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSkipAll)))
     }
     
     @objc func onNextPageClick(){
@@ -158,17 +122,13 @@ class GenericPageController: UICollectionViewController, UICollectionViewDelegat
         let currentItem: IndexPath = visibleItems.object(at: 0) as! IndexPath
         let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)
         let pageNumber = currentItem.item + 1
-        print("ITEMNUMBER ==> \(pageNumber)")
         if nextItem.row < pages.count {
-            if pageNumber == 2{
+            if pageNumber == pages.count - 1{
                 customImageView.isHidden = true
-                continueLabel.isHidden = false
-                skipAllLabel.isHidden = true
+                submitLabel.isHidden = false
             }
             pageControl.currentPage = pageNumber
             self.collectionView.scrollToItem(at: nextItem, at: .centeredHorizontally, animated: true)
-//            selectedExerciseData = items[nextItem.item].exercise
-//            initExerciseData()
         }
     }
     

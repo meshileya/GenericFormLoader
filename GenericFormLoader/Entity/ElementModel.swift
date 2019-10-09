@@ -13,6 +13,7 @@ class ElementModel : NSObject, NSCoding{
     var label : String!
     var rules : [AnyObject]!
     var type : String!
+    var file : String!
     var uniqueId : String!
 
 
@@ -24,6 +25,7 @@ class ElementModel : NSObject, NSCoding{
         label = dictionary["label"] as? String
         type = dictionary["type"] as? String
         uniqueId = dictionary["unique_id"] as? String
+        file = dictionary["file"] as? String
     }
 
     /**
@@ -44,6 +46,9 @@ class ElementModel : NSObject, NSCoding{
         if uniqueId != nil{
             dictionary["unique_id"] = uniqueId
         }
+        if file != nil{
+            dictionary["file"] = file
+        }
         return dictionary
     }
 
@@ -58,6 +63,7 @@ class ElementModel : NSObject, NSCoding{
         rules = aDecoder.decodeObject(forKey: "rules") as? [AnyObject]
         type = aDecoder.decodeObject(forKey: "type") as? String
         uniqueId = aDecoder.decodeObject(forKey: "unique_id") as? String
+        file = aDecoder.decodeObject(forKey: "file") as? String
     }
 
     /**
@@ -80,6 +86,9 @@ class ElementModel : NSObject, NSCoding{
         }
         if uniqueId != nil{
             aCoder.encode(uniqueId, forKey: "unique_id")
+        }
+        if file != nil{
+            aCoder.encode(file, forKey: "file")
         }
     }
 }
