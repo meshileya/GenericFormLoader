@@ -15,6 +15,7 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
     
     let yesLabel = UILabel()
     let noLabel = UILabel()
+    let targetLabel = UILabel()
     
     var stackView : UIStackView!
     
@@ -121,15 +122,21 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
                         subStackView.addArrangedSubview(yesLabel)
                         subStackView.addArrangedSubview(noLabel)
                         
+                        stackView.addArrangedSubview(label)
+                        stackView.addArrangedSubview(subStackView)
                         if elementItems.rules.count > 0{
                             for item in elementItems.rules {
                                 for (key, value) in item {
-                                    
+                                    if key as! String == "targets"{
+                                        for items in value as! NSArray{
+                                            targetLabel.text = (items as! String)
+                                            targetLabel.font = .systemFont(ofSize: 14, weight: .bold)
+                                            stackView.addArrangedSubview(targetLabel)
+                                        }
+                                    }
                                 }
                             }
                         }
-                        stackView.addArrangedSubview(label)
-                        stackView.addArrangedSubview(subStackView)
                     }
                 }
             }
@@ -139,11 +146,13 @@ class GenericPageCell: UICollectionViewCell, UIScrollViewDelegate {
     @objc func onYesTapped(){
         yesLabel.font = .systemFont(ofSize: 18, weight: .bold)
         noLabel.font = .systemFont(ofSize: 14, weight: .light)
+        targetLabel.isHidden = false
     }
     
     @objc func onNoTapped(){
         noLabel.font = .systemFont(ofSize: 18, weight: .bold)
         yesLabel.font = .systemFont(ofSize: 14, weight: .light)
+        targetLabel.isHidden = true
     }
     
     lazy var scrollView : UIScrollView = {
